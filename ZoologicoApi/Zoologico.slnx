@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AnimalDomain/AnimalDomain.csproj" />
+  <Project Path="ApiZoologico/ApiZoologico.csproj" Id="3ba6f374-8c97-40e7-bab4-0b438ed30e50" />
+</Solution>
