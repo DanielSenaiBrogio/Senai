@@ -1,0 +1,28 @@
+/* Container principal que organiza todos os cards em grid */
+.cardsContainer{
+    width: 100%;           /* Ocupa toda a largura disponível */
+    height: 100%;          /* Ocupa toda a altura disponível */
+    display: grid;         /* Usa CSS Grid para organizar os elementos */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cria colunas responsivas: mínimo 200px, se ajusta automaticamente */
+    gap: 15px;            /* Espaçamento de 15px entre os cards */
+    padding: 20px;         /* Margem interna de 20px no container */
+}
+
+/* Estilo individual de cada card */
+.card{
+    border: 1px solid #ddd;        /* Borda cinza clara */
+    padding: 20px;                 /* Espaçamento interno de 20px */
+    border-radius: 8px;            /* Bordas arredondadas de 8px */
+    background: white;              /* Fundo branco */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra sutil para dar profundidade */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animação suave de 0.2s para transformação e sombra */
+    cursor: pointer;               /* Muda o cursor para mãozinha ao passar o mouse */
+    text-align: center;            /* Centraliza o texto dentro do card */
+    font-weight: 500;              /* Fonte um pouco mais grossa */
+}
+
+/* Efeito quando o mouse passa por cima do card */
+.card:hover {
+    transform: translateY(-2px);    /* Move o card 2px para cima (efeito de "levantar") */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Aumenta a sombra para dar mais profundidade */
+}
