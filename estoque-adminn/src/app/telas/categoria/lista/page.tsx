@@ -1,7 +1,14 @@
+"use client";
 import styles from "../../card.module.css";
-export default function ListaCategoria() {
+import { useRouter } from "next/navigation";
+export default function TelaListaCategoria() {
+    const router = useRouter();
+    
     return (
+    <>
+        <h1 className={styles.title}>Lista de Categorias</h1>
         <div className={styles.cardsContainer}>
+            <div onClick={() => router.push("/telas/categoria/cadastro")} className={styles.cardCriar}>➕ Criar</div>
             <div className={styles.card}>Caneca</div>
             <div className={styles.card}>Chaleira</div>
             <div className={styles.card}>Colherzinhas</div>
@@ -14,5 +21,6 @@ export default function ListaCategoria() {
             <div className={styles.card}>Açucareiro</div>
             <div className={styles.card}>Panela que fazem feijão</div>
         </div>
+    </>
     );
 }

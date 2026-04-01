@@ -26,3 +26,30 @@
     transform: translateY(-2px);    /* Move o card 2px para cima (efeito de "levantar") */
     box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Aumenta a sombra para dar mais profundidade */
 }
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cardCriar {
+    border: 2px dashed #4CAF50;        /* Borda tracejada verde */
+    padding: 20px;                     /* Espaçamento interno de 20px */
+    border-radius: 8px;                /* Bordas arredondadas de 8px */
+    background: #f8fff8;               /* Fundo verde claro */
+    color: #4CAF50;                    /* Texto verde */
+    font-weight: 600;                  /* Fonte mais grossa */
+    display: flex;                     /* Flexbox para centralizar conteúdo */
+    align-items: center;               /* Centraliza verticalmente */
+    justify-content: center;            /* Centraliza horizontalmente */
+    font-size: 16px;                   /* Tamanho da fonte */
+    transition: all 0.2s ease;        /* Transição suave */
+    cursor: pointer;                  /* Muda o cursor para mãozinha */
+}
+
+.cardCriar:hover {
+    background: #4CAF50;               /* Fundo verde no hover */
+    color: white;                      /* Texto branco no hover */
+    transform: scale(1.02);            /* Aumenta um pouco no hover */
+}
+

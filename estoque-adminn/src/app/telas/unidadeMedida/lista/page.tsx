@@ -3,9 +3,9 @@ import styles from "../../card.module.css";
 export default function TelaListaUnidadeMedida() {
     return (
         <div>
-            <h1>Lista de Unidade De Medida</h1>
+            <h1 className={styles.title}>Lista de Unidade De Medida</h1>
             <div className={styles.cardsContainer}>
-                
+                <div  className={styles.cardCriar}>➕ Criar</div>
                 <div className={styles.card}>Quilograma (kg)</div>
                 <div className={styles.card}>Grama (g)</div>
                 <div className={styles.card}>Litro (L)</div>
