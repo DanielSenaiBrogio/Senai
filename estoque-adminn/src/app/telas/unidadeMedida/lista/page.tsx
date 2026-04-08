@@ -1,11 +1,15 @@
+
+"use client";
 import styles from "../../card.module.css";
+import { useRouter } from "next/navigation";
 
 export default function TelaListaUnidadeMedida() {
+    const router = useRouter();
     return (
         <div>
             <h1 className={styles.title}>Lista de Unidade De Medida</h1>
             <div className={styles.cardsContainer}>
-                <div  className={styles.cardCriar}>➕ Criar</div>
+                <div onClick={() => router.push("/telas/unidadeMedida/Personalizado")} className={styles.cardCriar}>➕ Criar</div>
                 <div className={styles.card}>Quilograma (kg)</div>
                 <div className={styles.card}>Grama (g)</div>
                 <div className={styles.card}>Litro (L)</div>

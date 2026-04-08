@@ -1,0 +1,148 @@
+.container {
+  padding: 20px;
+}
+
+.autocomplete {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  background: #020617;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.dropdown li:hover {
+  background: #1e293b;
+}
+.pesquisaProduto {
+  width: 97%;
+  height: 40px;
+  border-radius: 8px;
+  padding: 10px;
+}
+/* ========================================
+   CSS DO SELECT - PESQUISA DE PRODUTOS
+   ======================================== */
+
+/* Container que centraliza o select na página */
+.selectContainer {
+    display: flex;           /* Usa flexbox para alinhamento */
+    justify-content: center;  /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    width: 100%;              /* Ocupa largura total disponível */
+}
+
+/* Estilo principal do select dropdown */
+.Azure {
+    /* === DIMENSÕES === */
+    width: 100%;              /* Largura: 100% do container */
+    max-width: 400px;         /* Largura máxima: 400px (responsivo) */
+    height: 50px;             /* Altura fixa: 50px */
+    padding: 12px 16px;      /* Espaçamento interno: 12px vertical, 16px horizontal */
+    padding-right: 40px;      /* Espaço extra à direita para não sobrepor a seta */
+
+    /* === APARÊNCIA === */
+    border-radius: 12px;      /* Bordas arredondadas de 12px */
+    border: 3px solid #e2e8f0; /* Borda grossa (3px) na cor cinza claro */
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+                             /* Fundo gradiente diagonal (cinza muito claro) */
+    color: #1f2937;           /* Cor do texto: cinza escuro */
+    font-size: 16px;          /* Tamanho da fonte: 16px (legível) */
+    font-weight: 300px;       /* Peso da fonte: 300 (leve) - OBS: deveria ser "300" sem "px" */
+
+    /* === INTERATIVIDADE === */
+    cursor: pointer;          /* Cursor em formato de mãozinha */
+    transition: all 0.3s ease; /* Animação suave de 0.3s para todas as propriedades */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Sombra suave e discreta */
+
+    /* === SETA CUSTOMIZADA === */
+    appearance: none;         /* Remove a seta padrão do navegador */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+                             /* Seta SVG embutida no código (triângulo para baixo) */
+    background-repeat: no-repeat;     /* Não repete a imagem de fundo */
+    background-position: right 16px center; /* Posiciona a seta: 16px da direita, verticalmente centralizado */
+}
+
+/* Estado FOCUS (quando o select está selecionado/ativo) */
+.Azure:focus {
+    outline: none;           /* Remove a borda padrão de focus do navegador */
+    border-color: black;      /* Borda fica preta quando em focus */
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 4px 12px rgba(59, 130, 246, 0.15);
+                             /* Sombra azul ao redor: anel azul + sombra projetada */
+}
+
+/* Estado HOVER (quando o mouse passa sobre o select) */
+.Azure:hover {
+    border-color: #cbd5e1;    /* Borda fica cinza mais clara no hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra mais forte e elevada */
+}
+body {
+  margin: 0;
+}
+
+.sectionCenter {
+  display: flex;
+  justify-content: center; /* horizontal */
+      /* vertical */
+  
+}
+
+
+/* Estilo simples e humano para a tabela */
+.Fazer {
+    width: 100%;
+    max-width: 90%;
+    margin: 10px auto 0;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.valores {
+    width: 33%;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* Cabeçalho simples */
+.Fazer thead .valores {
+    background: #f8fafc;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+/* Linhas simples */
+.Fazer tbody tr:hover {
+    background: #f9fafb;
+}
+
+.Fazer tbody td {
+    padding: 12px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+
