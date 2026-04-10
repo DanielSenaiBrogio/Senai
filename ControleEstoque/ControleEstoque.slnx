@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="ApiControleEstoque/ApiControleEstoque.csproj" Id="703d2578-8fa8-466c-8174-023cbe27c026" />
-  <Project Path="ProdutoDoMain/ProdutoDoMain.csproj" />
+  <Project Path="ApiControleEstoque/ApiControleEstoque.csproj" />
+  <Project Path="ProdutoDomain/ProdutoDomain.csproj" />
 </Solution>

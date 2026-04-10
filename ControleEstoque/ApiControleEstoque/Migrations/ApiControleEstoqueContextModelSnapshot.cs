@@ -17,41 +17,78 @@ namespace ApiControleEstoque.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.5")
+                .HasAnnotation("ProductVersion", "10.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProdutoDoMain.CategoriaProduto", b =>
+            modelBuilder.Entity("ProdutoDomain.CategoriaProduto", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoriasProduto");
+                });
+
+            modelBuilder.Entity("ProdutoDomain.Produto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Habilitado")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("id");
+                    b.Property<string>("NomeArquivoFoto")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("CategoriaProduto");
+                    b.Property<decimal>("QuantidadeAtual")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UnidadeMedidaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("UnidadeMedidaId");
+
+                    b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("ProdutoDoMain.UnidadeMedida", b =>
+            modelBuilder.Entity("ProdutoDomain.UnidadeMedida", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Fracionado")
+                    b.Property<bool>("Fracionavel")
                         .HasColumnType("bit");
 
                     b.Property<string>("Sigla")
@@ -59,9 +96,28 @@ namespace ApiControleEstoque.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("UnidadesMedida");
+                });
+
+            modelBuilder.Entity("ProdutoDomain.Produto", b =>
+                {
+                    b.HasOne("ProdutoDomain.CategoriaProduto", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProdutoDomain.UnidadeMedida", "UnidadeMedida")
+                        .WithMany()
+                        .HasForeignKey("UnidadeMedidaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("UnidadeMedida");
                 });
 #pragma warning restore 612, 618
         }

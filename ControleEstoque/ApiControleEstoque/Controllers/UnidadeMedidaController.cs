@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiControleEstoque.Data;
-using ProdutoDoMain;
+using ProdutoDomain;
 
 namespace ApiControleEstoque.Controllers
 {
@@ -42,7 +42,7 @@ namespace ApiControleEstoque.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUnidadeMedida(Guid id, UnidadeMedida unidadeMedida)
         {
-            if (id != unidadeMedida.id)
+            if (id != unidadeMedida.Id)
             {
                 return BadRequest();
             }
@@ -76,7 +76,7 @@ namespace ApiControleEstoque.Controllers
             _context.UnidadesMedida.Add(unidadeMedida);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUnidadeMedida", new { id = unidadeMedida.id }, unidadeMedida);
+            return CreatedAtAction("GetUnidadeMedida", new { id = unidadeMedida.Id }, unidadeMedida);
         }
 
         // DELETE: api/UnidadeMedida/5
@@ -97,7 +97,7 @@ namespace ApiControleEstoque.Controllers
 
         private bool UnidadeMedidaExists(Guid id)
         {
-            return _context.UnidadesMedida.Any(e => e.id == id);
+            return _context.UnidadesMedida.Any(e => e.Id == id);
         }
     }
 }

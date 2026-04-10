@@ -1,21 +1,16 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations;
 
-using System.ComponentModel.DataAnnotations;
-
-namespace ProdutoDoMain;
+namespace ProdutoDomain;
 
 public class CategoriaProduto
 {
-    public CategoriaProduto(string nome, string descricao)
+    public CategoriaProduto(string nome, string? descricao)
     {
         Nome = nome;
         Descricao = descricao;
     }
 
-    [Key]
-    public Guid id { get; set;}
-    [StringLength(50)]
-    public required string Nome { get; set; }
-    public string Descricao { get; set; }
-
+    [Key] public Guid Id { get; set; }
+    [StringLength(100)] public required string Nome { get; set; }
+    public string? Descricao { get; set; }
 }
