@@ -1,4 +1,7 @@
+'use client';
+
 import styles from "./pesquisa.module.css";
+
 export default function TelaPesquisaProduto() {
     return (
         <section>
@@ -135,6 +138,7 @@ export default function TelaPesquisaProduto() {
 
 
             </table>
+            <button className={styles['Adicionar-Produto']} onClick={() => window.location.href = '/telas/produto/cadastro'}>Adicionar Produto</button>
         </section>
     );
 }

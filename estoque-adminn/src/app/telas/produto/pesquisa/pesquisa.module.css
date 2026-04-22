@@ -144,5 +144,27 @@ body {
     font-size: 14px;
     color: #4b5563;
 }
+.Adicionar-Produto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #6a74e7 0%, #478af0 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:linear-gradient(135deg, #10b981 0%, #059669 100%);
+    min-width: 200px;
+}
+ 
+.Adicionar-Produto:hover {
+    background:linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+ 
 
 
