@@ -3,6 +3,7 @@ using ApiControleEstoque.Data;
 using Mapster;
 using ApiControleEstoque.Contracts;
 using ProdutoDomain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApiControleEstoqueContext>(options =>
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<ApiControleEstoqueContext>(options =>
         throw new InvalidOperationException("Connection string 'ApiControleEstoqueContext' not found.")));
 
 // Add services to the container.
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -26,6 +28,9 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
