@@ -132,48 +132,7 @@ public class ProdutoController : ControllerBase
         return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
     }
 
-    // DELETE: api/Produto/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteProduto(Guid id)
-    {
-        //Busca no banco o produto com o ID passado na url
-        var produto = await _context.Produtos.FindAsync(id);
-        if (produto == null)
-        {
-            return NotFound();
-        }
-
-        //Se o produto tem imagem, deleta do disco
-        if (!string.IsNullOrEmpty(produto.NomeArquivoFoto))
-        {
-            //Monta o caminho completo da imagem
-            var caminhoImagem = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imagens", produto.NomeArquivoFoto);
-            
-            Console.WriteLine($"Tentando deletar imagem: {caminhoImagem}");
-            
-            //Verifica se o arquivo existe antes de deletar
-            if ( System.IO.File.Exists(caminhoImagem))
-            {
-                //Deleta o arquivo do disco
-                System.IO.File.Delete(caminhoImagem);
-                Console.WriteLine("Imagem deletada com sucesso!");
-            }
-            else
-            {
-                Console.WriteLine("Imagem não encontrada no disco");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Produto não tem imagem para deletar");
-        }
-
-        //Remove o produto do banco de dados
-        _context.Produtos.Remove(produto);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
+   
 
     private bool ProdutoExists(Guid id)
     {

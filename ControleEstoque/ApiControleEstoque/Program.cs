@@ -3,7 +3,6 @@ using ApiControleEstoque.Data;
 using Mapster;
 using ApiControleEstoque.Contracts;
 using ProdutoDomain;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApiControleEstoqueContext>(options =>
@@ -29,7 +28,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors(politica => politica.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 app.UseSwagger();
+
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
@@ -37,5 +39,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseStaticFiles();
 
 app.Run();
