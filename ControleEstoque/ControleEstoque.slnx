@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ApiControleEstoque/ApiControleEstoque.csproj" />
+  <Project Path="ProdutoDomain/ProdutoDomain.csproj" />
+</Solution>

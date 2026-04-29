@@ -1,0 +1,83 @@
+/* Estilos bonitos e simples para o formulário */
+
+.input {
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    max-width: 300px;
+    width: 100%;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.textarea {
+    min-height: 120px;
+    max-height: 120px;
+    min-width: 830px;
+    max-width: 830px;
+    overflow: auto;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #ffffff;
+    
+
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #374151;
+    font-size: 14px;
+}
+
+.title {
+    color: #1f2937;
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-right: 8px;
+}
+
+.button:first-of-type {
+    background: #3b82f6;
+    color: white;
+}
+
+.button:first-of-type:hover {
+    background: #2563eb;
+}
+
+.button:last-of-type {
+    background: #ef4444;
+    color: white;
+}
+
+.button:last-of-type:hover {
+    background: #dc2626;
+}

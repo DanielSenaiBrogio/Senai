@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="EquipeLib/EquipeLib.csproj" />
+  <Project Path="PilotoLib/PilotoLib.csproj" />
+  <Project Path="ZigZagCorrida/ZigZagCorrida.csproj" />
+</Solution>
