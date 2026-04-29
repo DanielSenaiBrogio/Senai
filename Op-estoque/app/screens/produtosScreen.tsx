@@ -1,12 +1,26 @@
 // Importações necessárias do React Native e bibliotecas externas
-import { useState } from 'react'; // Hook para gerenciar estado
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native"; // Componentes básicos do React Native
+import { useRef, useState } from 'react'; // Hooks para gerenciar estado e referências
+import { Animated, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native"; // Componentes básicos do React Native
 import { Searchbar } from "react-native-paper"; // Componente de busca da biblioteca Paper
 
 // Componente principal da tela de produtos
 export default function ProdutosScreen() {
     // Estado para armazenar o texto digitado na barra de busca
     const [searchQuery, setSearchQuery] = useState('');
+    const scrollY = useRef(new Animated.Value(0)).current;
+
+    // Animação da barra de busca
+    const searchBarTranslateY = scrollY.interpolate({
+        inputRange: [0, 50],
+        outputRange: [0, -100],
+        extrapolate: 'clamp',
+    });
+
+    const searchBarOpacity = scrollY.interpolate({
+        inputRange: [0, 30],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+    });
 
     // Estrutura JSX da tela
     return (
@@ -18,34 +32,147 @@ export default function ProdutosScreen() {
                 source={require('../../assets/images/fundo.jpeg')} // Imagem de fundo local
                 resizeMode='cover' // Ajusta a imagem para cobrir todo o espaço
             >
-                {/* Título descritivo da tela */}
-                <Text style={styles.texto}>Produtos ou Categorias</Text>
-                
-                {/* Barra de busca para filtrar produtos */}
-                <Searchbar
-                    style={styles.searchBar}
-                    placeholder="Buscar produtos ou categorias" // Texto de ajuda
-                    onChangeText={setSearchQuery} // Atualiza o estado quando o texto muda
-                    value={searchQuery} // Valor controlado pelo estado
-                />
+                {/* Barra de busca animada */}
+                <Animated.View style={[
+                    styles.searchContainer,
+                    {
+                        transform: [{ translateY: searchBarTranslateY }],
+                        opacity: searchBarOpacity,
+                    }
+                ]}>
+                    <Text style={styles.texto}>Produtos ou Categorias</Text>
+                    <Searchbar
+                        style={styles.searchBar}
+                        placeholder="Buscar produtos ou categorias" // Texto de ajuda
+                        onChangeText={setSearchQuery} // Atualiza o estado quando o texto muda
+                        value={searchQuery} // Valor controlado pelo estado
+                    />
+                </Animated.View>
                 
                 {/* Container com scroll para lista de produtos */}
-                <ScrollView style={styles.cardsContainer}>
-                    {/* Card individual de produto */}
-                    <View style={styles.card}>
-                        {/* Imagem do produto */}
-                        <ImageBackground
-                            source={require('../../assets/images/Arroz.jpg')} // Imagem do produto
-                            style={styles.cardImage}
-                            imageStyle={{ borderRadius: 10 }} // Borda arredondada na imagem
-                        />
-                        {/* Container com informações textuais do produto */}
-                        <View style={styles.cardTextContainer}>
-                            <Text style={styles.cardTitle}>Arroz</Text> {/* Nome do produto */}
-                            <Text style={styles.cardDescription}>Pacote 5kg</Text> {/* Descrição do produto */}
+                <ScrollView
+                    style={styles.cardsContainer}
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                        { useNativeDriver: false }
+                    )}
+                    scrollEventThrottle={16}
+                >
+                    {/* Linha 1 - Arroz, Feijão e Macarrão */}
+                    <View style={styles.row}>
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Arroz.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Arroz</Text>
+                                <Text style={styles.cardDescription}>5kg</Text>
+                            </View>
                         </View>
-                        {/*Outra view */}
-                        
+
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Feijao.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Feijão</Text>
+                                <Text style={styles.cardDescription}>1kg</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Macarrao.png')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Macarrão</Text>
+                                <Text style={styles.cardDescription}>500g</Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    {/* Linha 2 - Óleo, Açúcar e Sal */}
+                    <View style={styles.row}>
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Oleo.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Óleo</Text>
+                                <Text style={styles.cardDescription}>900ml</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Açucar.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Açúcar</Text>
+                                <Text style={styles.cardDescription}>1kg</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Sal.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Sal</Text>
+                                <Text style={styles.cardDescription}>1kg</Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    {/* Linha 3 - Café, Farinha e Leite */}
+                    <View style={styles.row}>
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Cafe.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Café</Text>
+                                <Text style={styles.cardDescription}>500g</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Farinha.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Farinha</Text>
+                                <Text style={styles.cardDescription}>1kg</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.card}>
+                            <ImageBackground
+                                source={require('../../assets/images/Leite.jpg')}
+                                style={styles.cardImage}
+                                imageStyle={{ borderRadius: 8 }}
+                            />
+                            <View style={styles.cardTextContainer}>
+                                <Text style={styles.cardTitle}>Leite</Text>
+                                <Text style={styles.cardDescription}>1L</Text>
+                            </View>
+                        </View>
                     </View>
 
                 </ScrollView>
@@ -54,73 +181,100 @@ export default function ProdutosScreen() {
     );
 }
 
-// Estilos para os componentes da tela
+// Estilos
 const styles = StyleSheet.create({
-    // Estilo para o container principal - ocupa toda a tela e centraliza conteúdo
+    // Container principal
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    // Estilo para o título principal (não usado atualmente)
+    // Título principal
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
         color: '#ffffff',
     },
-    // Estilo para o texto descritivo "Produtos ou Categorias"
+    // Texto descritivo
     texto: {
         fontSize: 16,
         marginBottom: 15,
         color: '#ffffff',
     },
-    // Estilo para a barra de busca - largura reduzida e espaçamento inferior
+    // Barra de busca animada
+    searchContainer: {
+        width: '100%',
+        alignItems: 'center',
+        paddingTop: 40,
+        paddingBottom: 10,
+        backgroundColor: 'transparent',
+        zIndex: 1,
+    },
+    // Estilo da barra de busca
     searchBar: {
         width: '50%',
         marginBottom: 20,
+        backgroundColor: 'rgba(255,255,255,0.9)',
     },
-    // Estilo para a imagem de fundo - cobre toda a tela e centraliza elementos
+    // Imagem de fundo
     fundo: {
         width: '100%',
         height: '100%',
         position: 'absolute',
         alignItems: 'center',
     },
-    // Estilo para o card de produto - layout horizontal com fundo branco
+    // Card de produto
     card: {
-        flexDirection: 'row', // Alinha itens horizontalmente
-        width: '90%', // Largura responsiva
-        backgroundColor: '#fff', // Fundo branco para contraste
-        borderRadius: 10, // Borda arredondada
-        padding: 10, // Espaçamento interno
-        marginTop: 15, // Espaçamento superior entre cards
-        alignItems: 'center', // Centraliza verticalmente
+        width: 110,
+        height: 140,
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        padding: 10,
+        margin: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 4,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
     },
-    // Estilo para a imagem dentro do card - tamanho fixo
+    // Imagem do card
     cardImage: {
-        width: 80, // Largura fixa da imagem
-        height: 80, // Altura fixa da imagem
-        marginRight: 10, // Espaçamento à direita
+        width: 70,
+        height: 70,
+        borderRadius: 10,
+        marginBottom: 8,
     },
-    // Container para o texto do card - ocupa espaço restante
+    // Container do texto
     cardTextContainer: {
-        flex: 1, // Ocupa todo o espaço disponível
+        alignItems: 'center',
+        flex: 1,
     },
-    // Estilo para o título do produto - texto em negrito
+    // Linhas da grade
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    // Título do produto
     cardTitle: {
         fontSize: 16,
         fontWeight: 'bold',
+        textAlign: 'center',
     },
-    // Estilo para a descrição do produto - texto secundário
+    // Descrição do produto
     cardDescription: {
-        fontSize: 14,
-        color: '#666', // Cor cinza para texto secundário
+        fontSize: 13,
+        color: '#666',
+        textAlign: 'center',
     },
-    // Container para a lista de cards com scroll
+    // Container dos cards
     cardsContainer: {
-        width: '100%', // Largura total
-        marginTop: 20, // Espaçamento superior
-        paddingHorizontal: 20, // Espaçamento horizontal interno
+        width: '100%',
+        marginTop: 20,
+        paddingHorizontal: 20,
     },
 });
