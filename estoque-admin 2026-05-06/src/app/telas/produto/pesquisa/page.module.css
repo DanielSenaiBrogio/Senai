@@ -1,0 +1,14 @@
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+}
+
+.parametros {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px
+}
