@@ -1,0 +1,19 @@
+.input,
+.textArea,
+.select {
+    padding: 5px;
+}
+
+.input:focus,
+.textArea:focus,
+.select:focus {
+    background-color: beige;
+}
+
+.textArea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 50px;
+    max-height: 200px;
+    overflow-y: scroll;
+}

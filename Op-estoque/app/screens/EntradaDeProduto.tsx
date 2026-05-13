@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Ioperacaodetalhes } from '../interfaces/Ioperacaodetalhes';
+import { useLocalSearchParams } from 'expo-router';
 
 export default function EntradaDeProduto() {
     const [motivo, setMotivo] = useState('');
+    const { tipo } = useLocalSearchParams();
+    const [ operacaoDetalhes ] = useState<Ioperacaodetalhes[]>([
+      {id: '1', nome: 'Arroz', quantidade: 10, unidadeMedida: 'kg'},
+      {id: '2', nome: 'Feijão', quantidade: 5, unidadeMedida: 'kg'},
+      {id: '3', nome: 'Macarrão', quantidade: 8, unidadeMedida: 'kg'},
+      {id: '4', nome: 'Oleo', quantidade: 6, unidadeMedida: 'lt'},
+
+      
+      
+      
+
+        
+    ]);
 
     return (
         <ImageBackground 
