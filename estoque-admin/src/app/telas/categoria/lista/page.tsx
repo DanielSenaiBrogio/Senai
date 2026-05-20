@@ -4,24 +4,22 @@ import { useRouter } from "next/navigation";
 import styleCards from "../../card.module.css";
 import styleTexts from "../../text.module.css";
 import styles from "../lista/page.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICategoria } from "@/app/interfaces/icategoria";
+import { Listar } from "../api";
 
 export default function TelaListaCategoria() {
     const router = useRouter();
 
-    const [categorias] = useState<ICategoria[]>([
-        { id: '01', nome: "Canecas", descricao: null },
-        { id: '02', nome: "Chaleiras", descricao: null },
-        { id: '03', nome: "Colheres", descricao: null },
-        { id: '04', nome: "Pratos", descricao: null },
-        { id: '05', nome: "Garfos", descricao: null },
-        { id: '06', nome: "Facões", descricao: null },
-        { id: '07', nome: "Saleiros", descricao: null },
-        { id: '08', nome: "Açucareiros", descricao: null },
-        { id: '09', nome: "Panelas", descricao: null },
-    ])
+    const [categorias, setCategorias] = useState<ICategoria[]>([])
 
+    async function CarregarDados(){
+        const lista = await Listar()
+        setCategorias(lista);
+    }
+
+    useEffect(() => {CarregarDados();}, []);
+    
     return (
         <section className={styles.conteudo}>
 

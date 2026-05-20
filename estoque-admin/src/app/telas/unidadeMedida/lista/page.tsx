@@ -4,24 +4,25 @@ import styleCards from "../../card.module.css";
 import styles from "../lista/page.module.css";
 import styleTexts from "../../text.module.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IUnidadeMedida } from "@/app/interfaces/iunidademedida";
+import { Listar } from "../api";
 
 export default function TelaListaUnidadeMedida() {
     const router = useRouter();
 
     const [unidadesMedida] = useState<IUnidadeMedida[]>([
-        { id: "01", sigla: "mg", descricao: "miligrama", fracionavel: true },
-        { id: "02", sigla: "g", descricao: "grama", fracionavel: true },
-        { id: "03", sigla: "kg", descricao: "quilograma", fracionavel: true },
-        { id: "04", sigla: "ml", descricao: "mililitro", fracionavel: true },
-        { id: "05", sigla: "l", descricao: "litro", fracionavel: true },
-        { id: "06", sigla: "mm", descricao: "mililitro", fracionavel: true },
-        { id: "07", sigla: "m", descricao: "metro", fracionavel: true },
-        { id: "08", sigla: "un", descricao: "unidade", fracionavel: false },
-        { id: "09", sigla: "dez", descricao: "dezena", fracionavel: false },
-        { id: "10", sigla: "dz", descricao: "dúzia", fracionavel: false },
+        //nada por enquanto
     ])
+
+    const [UnidadeMedida, setUnidadeMedida] = useState<IUnidadeMedida[]>([])
+
+    async function CarregarDados() {
+        const lista = await Listar()
+        setUnidadeMedida(lista);
+    }
+
+    useEffect(() => { CarregarDados(); }, []);
 
     return (
         <section className={styles.conteudo}>
@@ -32,7 +33,7 @@ export default function TelaListaUnidadeMedida() {
                 <div onClick={() => router.push("/telas/unidadeMedida/cadastro")} className={styleCards.cardCriar}>➕ Criar</div>
 
                 {
-                    unidadesMedida.map(unidade => (
+                    UnidadeMedida.map(unidade => (
                         <div
                             key={unidade.id}
                             className={styleCards.card}

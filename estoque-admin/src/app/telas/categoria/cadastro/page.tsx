@@ -5,24 +5,28 @@ import inputStyles from "../../input.module.css";
 import buttonStyles from "../../button.module.css";
 import textStyles from "../../text.module.css";
 
+
 import { useEffect, useState } from "react";
-import { ICategoriaInterface } from "../../../interfaces/icategoria";
+import { ICategoria } from "../../../interfaces/icategoria";
+import { useSearchParams } from "next/navigation";
+import { ObterPorId } from "../api";
 
 export default function TelaCategoriaCadastro() {
     
-    const [categoria, setCategoria] = useState<ICategoriaInterface>();
-    
-    function CarregarDados() {
-        const categoriaMocada: ICategoriaInterface = {
-            id: '123',
-            nome: 'Utensílios de Cozinha',
-            descricao: 'Qualquer produto da música Viro, Vira, Virou'
-        };
+    const [categoria, setCategoria] = useState<ICategoria>();
 
-        setCategoria(categoriaMocada);
+
+    const parametros = useSearchParams()
+    const id = parametros.get('id'); // TODO: Implementar busca por id
+    
+    async function CarregarDados() { // carrega os dados da categoria
+       if (id){
+        const dados = await ObterPorId(id);
+        setCategoria(dados);
+       }
     }
 
-    useEffect(() => {CarregarDados();}, []);
+    useEffect(() => {CarregarDados();}, []); // carregar informaçoes do useEffect
 
     return (
         <section className={styles.conteudo}>
@@ -30,7 +34,7 @@ export default function TelaCategoriaCadastro() {
             <h3 className={textStyles.titulo}>Cadastro de Categorias</h3>
 
             <label htmlFor="nome">Nome:</label>
-            <input
+            <input 
                 value={categoria?.nome}
                 onChange={(evento) => setCategoria({ ...categoria!, nome: evento.target.value })}
                 className={inputStyles.input} type="text" name="nome"
