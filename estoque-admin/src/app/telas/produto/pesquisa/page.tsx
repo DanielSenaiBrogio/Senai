@@ -7,42 +7,29 @@ import tableStyles from "../../table.module.css";
 import buttonStyles from "../../button.module.css";
 import styles from "../pesquisa/page.module.css";
 import { IProdutoPesquisa } from "@/app/interfaces/iprodutopesquisa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Listar } from "../api";
+import { Listar as ListarCategorias } from "@/app/telas/categoria/api";
+
 
 
 export default function TelaPesquisaProduto() {
     const router = useRouter();
 
-    const [produtos] = useState<IProdutoPesquisa[]>([
-        {
-            id: '01',
-            categoria: 'Canecas',
-            nome: 'Caneca da formatura',
-            quantidadeAtual: 1,
-            unidadeMedida: 'un'
-        },
-        {
-            id: '02',
-            categoria: 'Canecas',
-            nome: 'Caneca de porcelana',
-            quantidadeAtual: 10,
-            unidadeMedida: 'un'
-        },
-        {
-            id: '03',
-            categoria: 'Panelas',
-            nome: 'Panela que faz feijão fu fu',
-            quantidadeAtual: 1,
-            unidadeMedida: 'un'
-        },
-        {
-            id: '04',
-            categoria: 'Armas corpo a corpo',
-            nome: 'Sabre de Luz',
-            quantidadeAtual: 3,
-            unidadeMedida: 'un'
-        },
-    ])
+    
+    
+        const [produtos, setProduto] = useState<IProdutoPesquisa[]>([])
+        const [categorias, setCategorias] = useState<any[]>([])
+    
+        async function CarregarDados(){
+            const lista = await Listar()
+            setProduto(lista);
+            const categoriasLista = await ListarCategorias()
+            setCategorias(categoriasLista);
+        }
+    
+        useEffect(() => {CarregarDados();}, []);
+        
 
     return (
         <section className={styles.conteudo}>
@@ -51,13 +38,13 @@ export default function TelaPesquisaProduto() {
             <div className={styles.parametros}>
                 <div>
                     <label htmlFor="categoria">Categoria: </label> <br></br>
-                    <select className={inputStyles.select} name="categoria">
-                        <option></option>
-                        <option>Ferramentas</option>
-                        <option>Utensílios</option>
-                        <option>Líquidos Inflamáveis</option>
-                        <option>Alimentos</option>
-                        <option>Cama, Mesa e Banho</option>
+                    <select className={inputStyles.select} name="categoria">   
+                    {
+                        categorias.map(categoria => (
+                            <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
+                        ))
+                    }
+
                     </select>
 
                 </div>

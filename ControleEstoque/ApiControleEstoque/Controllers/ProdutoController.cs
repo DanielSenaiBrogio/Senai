@@ -21,9 +21,19 @@ public class ProdutoController : ControllerBase
 
     // GET: api/Produto
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Produto>>> GetProduto()
+    public async Task<ActionResult<IEnumerable<GetPesquisaProdutoRequest>>> GetProduto()
     {
-        return await _context.Produtos.ToListAsync();
+       return await _context.Produtos
+       .Include(prod => prod.Categoria)
+       .Include(prod => prod.UnidadeMedida)
+       .Select(prod => new GetPesquisaProdutoRequest
+       {
+        id = prod.Id,
+        CategoriaNome = prod.Categoria != null ? prod.Categoria.Nome : null,
+        ProdutoNome = prod.Nome,
+        QuantidadeAtual = prod.QuantidadeAtual,
+        UnidadeMedidaNome = prod.UnidadeMedida != null ? prod.UnidadeMedida.Sigla : ""
+       }).ToListAsync();
     }
 
     // GET: api/Produto/5
@@ -69,7 +79,7 @@ public class ProdutoController : ControllerBase
         }
            
         //Salva no banco de dados o nome do arquivo (formado pelo id do produto + extensao)
-        produto.NomeArquivoFoto = Path.Combine($"{id}{extensao}");
+        produto.NomeArquivoFoto = $"{id}{extensao}";
         await _context.SaveChangesAsync();
 
         return NoContent();
