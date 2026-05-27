@@ -1,8 +1,8 @@
 export interface IprodutosDoEstoque {
     id: string;
-    quantidade: number;
-    nome: string;
+    categoriaNome: string;
+    produtoNome: string;
+    quantidadeAtual: number;
     unidadeMedida: string;
-    imagem: any;
-
+    urlImagem: string | null | undefined ;
 }

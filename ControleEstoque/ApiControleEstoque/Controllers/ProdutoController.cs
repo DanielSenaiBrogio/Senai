@@ -32,7 +32,8 @@ public class ProdutoController : ControllerBase
         CategoriaNome = prod.Categoria != null ? prod.Categoria.Nome : null,
         ProdutoNome = prod.Nome,
         QuantidadeAtual = prod.QuantidadeAtual,
-        UnidadeMedidaNome = prod.UnidadeMedida != null ? prod.UnidadeMedida.Sigla : ""
+        UnidadeMedidaNome = prod.UnidadeMedida != null ? prod.UnidadeMedida.Sigla : "",
+        UrlImagem = prod.UrlImagem
        }).ToListAsync();
     }
 

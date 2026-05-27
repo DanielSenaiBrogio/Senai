@@ -1,7 +1,7 @@
-import { useState } from "react";
+import {  useState, useEffect } from "react";
+import api from "../services/api";
 
 import {
-    Image,
     ImageBackground,
     ScrollView,
     StyleSheet,
@@ -19,39 +19,41 @@ export default function ProdutosScreen() {
 
     const [parametro, setParametro] = useState("");
 
-    const [produtos] = useState<IprodutosDoEstoque[]>([
-        {
-            id: '1',
-            nome: 'Leite Piracanjuba',
-            quantidade: 4,
-            unidadeMedida: 'Un',
-            imagem: require('../../assets/images/Leite_piracanjuba.jpg'),
-        },
+    const [produtos, setProdutos] = useState<IprodutosDoEstoque[]>([]);
+    async function BuscarProdutos() {
 
-        {
-            id: '2',
-            nome: 'LEITE DE SACO',
-            quantidade: 10,
-            unidadeMedida: 'Un',
-            imagem: require('../../assets/images/Leite_de_saco.jpg'),
-        },
+    try {
 
-        {
-            id: '3',
-            nome: 'Leite de Jarro',
-            quantidade: 8,
-            unidadeMedida: 'Un',
-            imagem: require('../../assets/images/leite_de_jarro.jpg'),
-        },
+        const response = await api.get('/produto');
 
-        {
-            id: '4',
-            nome: 'Leite de Boi',
-            quantidade: 15,
-            unidadeMedida: 'Un',
-            imagem: require('../../assets/images/Leite_de_boi.jpg'),
-        },
-    ]);
+        console.log(response.data);
+
+        setProdutos(response.data);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+useEffect(() => {
+    BuscarProdutos();
+}, []);
+
+const produtosFiltrados = produtos.filter((produto) =>
+
+    produto.produtoNome
+        .toLowerCase()
+        .trim()
+        .includes(parametro.toLowerCase())
+    ||
+
+    produto.categoriaNome
+        .toLowerCase()
+        .trim()
+        .includes(parametro.toLowerCase())
+);
 
     return (
         <SafeAreaProvider>
@@ -73,7 +75,7 @@ export default function ProdutosScreen() {
                         style={styles.searchBar}
                         inputStyle={styles.texto}
                     />
-
+                    
                     <ScrollView
                         showsVerticalScrollIndicator={false}
                     >
@@ -81,31 +83,31 @@ export default function ProdutosScreen() {
                         <View style={styles.cardsContainer}>
 
                             {
-                                produtos.map((detalhe) => (
+                                produtosFiltrados.map((detalhe) => (
 
                                     <View
                                         key={detalhe.id}
                                         style={styles.card}
                                     >
 
-                                        <Image
-                                            style={styles.imagem}
-                                            source={detalhe.imagem}
-                                            resizeMode="contain"
-                                        />
+                                       
 
                                         <View style={styles.dados}>
 
                                             <Text style={styles.categoria}>
-                                                Categoria: Alimentos
+                                                Categoria: {detalhe.categoriaNome}
                                             </Text>
 
                                             <Text style={styles.nomeProduto}>
-                                                {detalhe.nome}
+                                                {detalhe.produtoNome}
                                             </Text>
 
                                             <Text style={styles.quantidade}>
-                                                Quantidade: {detalhe.quantidade} {detalhe.unidadeMedida}
+                                                Quantidade: {detalhe.quantidadeAtual} {detalhe.unidadeMedida}
+                                            </Text>
+
+                                            <Text style={styles.quantidade}>
+                                                Foto: {detalhe.urlImagem}
                                             </Text>
 
                                         </View>

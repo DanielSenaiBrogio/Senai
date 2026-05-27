@@ -5,3 +5,8 @@ export interface Ioperacaodetalhes{
     unidadeMedida: string;
     
 }
+
+
+
+
+
