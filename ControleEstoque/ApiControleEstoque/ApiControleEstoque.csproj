@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OperacaoDoMain\OperacaoDoMain.csproj" />
     <ProjectReference Include="..\ProdutoDomain\ProdutoDomain.csproj" />
   </ItemGroup>
 

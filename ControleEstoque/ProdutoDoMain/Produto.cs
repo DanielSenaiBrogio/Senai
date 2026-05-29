@@ -27,4 +27,5 @@ public class Produto
     public string? NomeArquivoFoto { get; set; }
     public string? Descricao { get; set; }
     [Column(TypeName = "decimal(18,2)")] public decimal QuantidadeAtual { get; set; }
+    public decimal Quantidade { get; set; }
 }

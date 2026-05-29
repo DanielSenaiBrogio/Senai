@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OperacaoDomain;
 using ProdutoDomain;
 
 namespace ApiControleEstoque.Data;
@@ -13,4 +14,6 @@ public class ApiControleEstoqueContext : DbContext
     public DbSet<UnidadeMedida> UnidadesMedida { get; set; } = default!;
     public DbSet<CategoriaProduto> CategoriasProduto { get; set; } = default!;
     public DbSet<Produto> Produtos { get; set; } = default!;
+
+    public DbSet<OperacaoEstoque> OperacaoEstoque { get; set; } = default!;
 }
