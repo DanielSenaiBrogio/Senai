@@ -1,9 +1,46 @@
+'use client'
 import styleTexts from '../../text.module.css';
 import styleInputs from '../../input.module.css';
 import styleBotoes from '../../button.module.css';
 import styles from './page.module.css';
+import { useRouter,} from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { IProdutoPesquisa } from '@/app/interfaces/iprodutopesquisa';
+import { Listar, ListarUnidades } from "../api";
+import { Listar as ListarCategorias } from "@/app/telas/categoria/api";
+
+ 
+
+
 
 export default function TelaProdutoCadastro() {
+
+
+        const router = useRouter();
+    
+        
+            const [produtos, setProduto] = useState<IProdutoPesquisa[]>([])
+            const [categorias, setCategorias] = useState<any[]>([])
+            const [unidadeMedidas, setUnidadeMedidas] = useState<any[]>([])
+        
+            async function CarregarDados(){
+                const lista = await Listar()
+                setProduto(lista);
+                const categoriasLista = await ListarCategorias()
+                setCategorias(categoriasLista);
+                const unidadeMedidasLista = await ListarUnidades()
+                setUnidadeMedidas(unidadeMedidasLista);
+            }
+            
+            useEffect(() => {
+            CarregarDados();
+            }, []);
+
+            useEffect(() => {
+            console.log(categorias);
+            }, [categorias]);
+        
+
     return (
         <section className={styles.conteudo}>
             <h3 className={styleTexts.titulo}>Cadastro de Produtos</h3>
@@ -29,27 +66,35 @@ export default function TelaProdutoCadastro() {
 
                     <div className={styles.info}>
                         <label htmlFor="unidadeMedida">Unidade de Medida:</label>
+                        
+
+
                         <select className={styleInputs.select} name='unidadeMedida'>
-                            <option>Litro (Lt)</option>
-                            <option>Quilograma (Kg)</option>
-                            <option>Unidade (Un)</option>
+                            {unidadeMedidas.map((unidadeMedida) => (
+                                <option key={unidadeMedida.id} value={unidadeMedida.id}>
+                                    {unidadeMedida.descricao} ({unidadeMedida.sigla})
+                                </option>
+                            ))}
                         </select>
+
                     </div>
 
                     <div className={styles.info}>
                         <label htmlFor="categoria">Categoria:</label>
                         <select className={styleInputs.select} name='categoria'>
-                            <option>Utensílios de Cozinha</option>
-                            <option>Brinquedos</option>
-                            <option>Inflamáveis</option>
+                            {categorias.map((categoria) => (
+                                <option key={categoria.id} value={categoria.id}>
+                                    {categoria.nome}
+                                </option>
+                            ))}
                         </select>
                     </div>
 
                     <div className={styles.info}>
                         <label htmlFor="habilitado">Habilitado:</label>
                         <select className={styleInputs.select} name='habilitado'>
-                            <option>Sim</option>
-                            <option>Não</option>
+                            <option value={true.toString()} >Sim</option>
+                            <option value={false.toString()}>Não</option>
                         </select>
                     </div>
                 </div>
@@ -78,6 +123,7 @@ export default function TelaProdutoCadastro() {
                     Salvar
                 </button>
             </div>
+
         </section>
     )
 }
