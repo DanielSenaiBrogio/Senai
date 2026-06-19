@@ -43,7 +43,15 @@ public class OperacaoEstoque
                 "Não é possível fazer operação com produto desabilitado"
             );
         }
-
+        if (EntradaSaida.ToUpper() == "E")
+        {
+            produto.Adicionar(quantidade);
+        }
+        else if (EntradaSaida.ToUpper() == "S")
+        {
+            produto.Remover(quantidade);
+        }
+        
         OperacaoEstoqueDetalhe detalhe = new(produto.Id, quantidade);
 
         _detalhes.Add(detalhe);

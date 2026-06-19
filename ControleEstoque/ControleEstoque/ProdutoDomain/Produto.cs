@@ -15,6 +15,10 @@ public class Produto
         Nome = nome;
         Descricao = descricao;
         QuantidadeAtual = quantidadeAtual;
+        if (quantidadeAtual < 0)
+        {
+            throw new ArgumentException("Quantidade atual não pode ser menor que zero");
+        }
     }
 
     [Key] public Guid Id { get; set; }
@@ -26,5 +30,18 @@ public class Produto
     [StringLength(50)] public string Nome { get; set; }
     public string? NomeArquivoFoto { get; set; }
     public string? Descricao { get; set; }
+
     [Column(TypeName = "decimal(18,2)")] public decimal QuantidadeAtual { get; set; }
+
+    public void Adicionar(decimal quantidade)
+    {
+        QuantidadeAtual += quantidade;
+    }
+
+    public void Remover(decimal quantidade)
+    {
+        QuantidadeAtual -= quantidade;
+    }
 }
+
+

@@ -7,5 +7,7 @@ public record GetPesquisaProdutoRequest
     public required string ProdutoNome { get; set; }
     public required decimal QuantidadeAtual { get; set; }
     public required string UnidadeMedida { get; set; }
+
+    public required bool Habilitado { get; set; }
     public string? NomeArquivoFoto { get; set; }
 }

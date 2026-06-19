@@ -31,49 +31,46 @@ namespace ApiControleEstoque.Controllers
 
         // GET: api/OperacaoEstoques/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<OperacaoEstoque>> GetOperacaoEstoque(Guid id)
+        public async Task<ActionResult<GetOperacaoResponse>> GetOperacaoEstoque(Guid id)
         {
-            var operacaoEstoque = await _context.OperacaoEstoque.FindAsync(id);
-
-            if (operacaoEstoque == null)
-            {
-                return NotFound();
-            }
-
-            return operacaoEstoque;
-        }
-
-        // PUT: api/OperacaoEstoques/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOperacaoEstoque(Guid id, OperacaoEstoque operacaoEstoque)
+            var operacaoEstoque = await _context.OperacaoEstoque
+        .Where(op => op.Id == id)
+        .Select(op => new GetOperacaoResponse
         {
-            if (id != operacaoEstoque.Id)
+            Id = op.Id,
+            Hora = op.Hora,
+            Motivo = op.Motivo,
+            EntradaSaida = op.EntradaSaida,
+
+            Detalhes = op.Detalhes.Select(detalhe => new OperacaoEstoqueDetalhesDTO
             {
-                return BadRequest();
-            }
+                Id = detalhe.Id,
+                Quantidade = detalhe.Quantidade,
 
-            _context.Entry(operacaoEstoque).State = EntityState.Modified;
+                NomeProduto = detalhe.Produto != null 
+                    ? detalhe.Produto.Nome 
+                    : "",
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OperacaoEstoqueExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                Sigla = detalhe.Produto != null 
+                    && detalhe.Produto.UnidadeMedida != null
+                        ? detalhe.Produto.UnidadeMedida.Sigla
+                        : ""
 
-            return NoContent();
-        }
+            }).ToList()
 
+        })
+        .FirstOrDefaultAsync();
+
+
+    if (operacaoEstoque == null)
+    {
+        return NotFound();
+    }
+
+    return operacaoEstoque;
+}
+
+    
         // POST: api/OperacaoEstoques
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
      [HttpPost]
@@ -143,9 +140,6 @@ namespace ApiControleEstoque.Controllers
             return NoContent();
         }
 
-        private bool OperacaoEstoqueExists(Guid id)
-        {
-            return _context.OperacaoEstoque.Any(e => e.Id == id);
-        }
+
     }
 }
