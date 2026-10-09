@@ -1,0 +1,155 @@
+
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  background: #f5efe5;
+  color: #243044;
+}
+
+.apresentacao {
+  flex: 1;
+  min-height: 100vh;
+  padding: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(29, 25, 20, 0.88),
+      rgba(29, 25, 20, 0.52)
+    ),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=85");
+  background-position: center;
+  background-size: cover;
+  color: #fffaf2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tituloLogo {
+  font-family: Georgia, serif !important;
+  font-weight: bold !important;
+}
+
+.mensagem {
+  max-width: 550px;
+}
+
+.tituloPrincipal {
+  font-family: Georgia, serif !important;
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+}
+
+.descricao {
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+}
+
+.frase {
+  color: #e5c49d;
+  font-style: italic;
+}
+
+.areaLogin {
+  width: 48%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.cartao {
+  width: 100%;
+  max-width: 510px;
+  padding: 42px;
+  border-radius: 22px !important;
+  background: #fffdf9 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.tituloLogin {
+  font-family: Georgia, serif !important;
+  font-weight: bold !important;
+  color: #243044;
+}
+
+.subtitulo {
+  color: #687080;
+  text-align: center;
+  margin-top: -12px !important;
+}
+
+.formulario {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.formulario :global(.MuiOutlinedInput-root) {
+  border-radius: 12px;
+  background: #fff;
+}
+
+.formulario :global(.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: #345b48;
+}
+
+.botaoEntrar {
+  min-height: 52px;
+  border-radius: 12px !important;
+  background: #294b3a !important;
+  text-transform: none !important;
+  font-size: 16px !important;
+}
+
+.botaoEntrar:hover {
+  background: #1e382b !important;
+}
+
+.cadastro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.cadastro :global(.MuiButton-root) {
+  color: #345b48;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.botaoVoltar {
+  margin-top: 4px !important;
+  color: #526052 !important;
+  text-transform: none !important;
+}
+
+@media (max-width: 850px) {
+  .apresentacao {
+    display: none;
+  }
+
+  .areaLogin {
+    width: 100%;
+    padding: 22px;
+  }
+
+  .cartao {
+    padding: 30px 22px;
+  }
+}
