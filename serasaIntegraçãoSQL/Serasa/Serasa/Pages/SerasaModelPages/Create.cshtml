@@ -1,0 +1,45 @@
+@page
+@model Serasa.Pages.SerasaModelPages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SerasaModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="SerasaModel.CPF" class="control-label"></label>
+                <input asp-for="SerasaModel.CPF" class="form-control" aria-required="true"/>
+                <span asp-validation-for="SerasaModel.CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerasaModel.Score" class="control-label"></label>
+                <input asp-for="SerasaModel.Score" class="form-control" />
+                <span asp-validation-for="SerasaModel.Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerasaModel.DataConsulta" class="control-label"></label>
+                <input asp-for="SerasaModel.DataConsulta" class="form-control" />
+                <span asp-validation-for="SerasaModel.DataConsulta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
