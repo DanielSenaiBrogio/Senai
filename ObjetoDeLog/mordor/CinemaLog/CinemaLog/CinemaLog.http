@@ -1,0 +1,38 @@
+@CinemaLog_HostAddress = http://localhost:5140
+
+### Lista todos os filmes do catálogo
+GET {{CinemaLog_HostAddress}}/api/filme
+Accept: application/json
+
+###
+
+### Busca um filme pelo id (substitua o guid)
+GET {{CinemaLog_HostAddress}}/api/filme/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+###
+
+### Cadastra um novo filme
+POST {{CinemaLog_HostAddress}}/api/filme
+Content-Type: application/json
+
+{
+  "nome": "O Senhor dos Anéis: A Sociedade do Anel",
+  "descricao": "Um hobbit parte em uma jornada para destruir um anel do poder."
+}
+
+###
+
+### Atualiza um filme existente (substitua o guid)
+PUT {{CinemaLog_HostAddress}}/api/filme/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "nome": "O Senhor dos Anéis: As Duas Torres",
+  "descricao": "A comunidade do anel se separa e a jornada continua."
+}
+
+###
+
+### Remove um filme (substitua o guid)
+DELETE {{CinemaLog_HostAddress}}/api/filme/00000000-0000-0000-0000-000000000000

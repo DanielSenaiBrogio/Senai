@@ -1,0 +1,1 @@
+2026-11-13 11:17:31.851 -03:00 [ERR] Falha no endpoint /erro-teste: Erro de teste
